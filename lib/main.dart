@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pi/chat_message.dart';
 import 'package:http/http.dart' as http;
 import 'package:pi/model/chat_completions_body.dart';
+import 'dart:convert';
 
 import 'model/messages.dart';
 
@@ -55,14 +56,15 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _sentPostRequest(String host, String path, String msg) async {
     Uri url = Uri.https(host,  path);
-    Map<String, String> headers = {"Content-type": "application/json",
-    "Authorization": "Bearer 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"};
-    http.post(url, headers: headers, body: ChatCompletionsBody(
+    Map<String, String> headers = {"Content-Type": "application/json",
+    "Authorization": "Bearer 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"};
+    http.post(url, headers: headers, body: jsonEncode(
+    ChatCompletionsBody(
       model: "gpt-3.5-turbo",
       messages: Messages(
         role: "user",
         content: msg)
-    ).toJson()).then((http.Response response) {
+    ).toJson())).then((http.Response response) {
         print(response.body);
     });
   }
