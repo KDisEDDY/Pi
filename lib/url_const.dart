@@ -21,14 +21,5 @@ class UrlConst {
   static const String _URL_ENGINE_FILES_LIST_STATUS = "$_URL_ENGINE/files/list_status";
   static const String _URL_ENGINE_FILES_DETAILS_STATUS = "$_URL_ENGINE/files/details_status";
   static const String _URL_ENGINE_FILES_DOWNLOAD_STATUS = "$_URL_ENGINE/files/download_status";
-  static const String _URL_ENGINE_FILES_UPLOAD_STATUS = "$_URL_ENGINE/files/upload_status";
-  static const String _URL_ENGINE_FILES_DELETE_STATUS = "$_URL_ENGINE/files/delete_status";
-  static const String _URL_ENGINE_FILES_LIST_STATUS = "$_URL_ENGINE/files/list_status";
-  static const String _URL_ENGINE_FILES_DETAILS_STATUS = "$_URL_ENGINE/files/details_status";
-  static const String _URL_ENGINE_FILES_DOWNLOAD_STATUS = "$_URL_ENGINE/files/download_status";
-  static const String _URL_ENGINE_FILES_UPLOAD_STATUS = "$_URL_ENGINE/files/upload_status";
-  static const String _URL_ENGINE_FILES_DELETE_STATUS = "$_URL_ENGINE/files/delete_status";
-
-
   const UrlConst();
 }

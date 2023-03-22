@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pi/chat-message.dart';
+import 'package:pi/chat_message.dart';
 import 'package:http/http.dart' as http;
-import 'package:pi/url-const.dart';
+import 'package:pi/model/chat_completions_body.dart';
+
+import 'model/messages.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,27 +49,32 @@ class _ChatScreenState extends State<ChatScreen> {
   void _sendMessage(String text) {
     messages.add(ChatMessage(messageContent: text, messageType: "user"));
     _textEditingController.clear();
-    _sentPostRequest()
+    _sentPostRequest("api.openai.com", "/v1/chat/completions", text);
     setState(() {});
   }
 
   void _sentPostRequest(String host, String path, String msg) async {
-    String url = Uri.https(UrlConst()._URL_HOST, UrlConst()._URL_ROUTE_ENGINE_COMPLETIONS);
-    Map<String, String> headers = {"Content-type": "application/json"};
-    http.post(url, headers: headers, body: "{"
-        "}")
-    })
+    Uri url = Uri.https(host,  path);
+    Map<String, String> headers = {"Content-type": "application/json",
+    "Authorization": "Bearer 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"};
+    http.post(url, headers: headers, body: ChatCompletionsBody(
+      model: "gpt-3.5-turbo",
+      messages: Messages(
+        role: "user",
+        content: msg)
+    ).toJson()).then((http.Response response) {
+        print(response.body);
+    });
   }
 
-
-  TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat Bot"),
+        title: const Text("Chat Bot"),
       ),
       body: Column(
         children: <Widget>[
