@@ -1,8 +1,15 @@
+import 'dart:convert';
+
+import 'package:json_annotation/json_annotation.dart';
+
 import 'messages.dart';
 
+part 'chat_completions_body.g.dart';
+
+@JsonSerializable()
 class ChatCompletionsBody {
     final String model;
-    final Messages messages;
+    final List<Message> messages;
 
 
     const ChatCompletionsBody({
@@ -10,17 +17,9 @@ class ChatCompletionsBody {
       required this.messages
     });
   
-    factory ChatCompletionsBody.fromJson(Map<String, dynamic> json) {
-      return ChatCompletionsBody (
-        model: json['model'] as String,
-        messages: json['messages'] as Messages
-      );
-    }
+    factory ChatCompletionsBody.fromJson(Map<String, dynamic> json) => _$ChatCompletionsBodyFromJson(json);
 
-    Map<String, dynamic> toJson() => {
-        'model': model,
-        'messages': messages.toJson() ,
-      };
+    Map<String, dynamic> toJson() => _$ChatCompletionsBodyToJson(this);
 }
 
 

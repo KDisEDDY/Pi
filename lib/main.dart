@@ -57,14 +57,17 @@ class _ChatScreenState extends State<ChatScreen> {
   void _sentPostRequest(String host, String path, String msg) async {
     Uri url = Uri.https(host,  path);
     Map<String, String> headers = {"Content-Type": "application/json",
-    "Authorization": "Bearer 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"};
-    http.post(url, headers: headers, body: jsonEncode(
-    ChatCompletionsBody(
-      model: "gpt-3.5-turbo",
-      messages: Messages(
+    "Authorization": "Bearer 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"};
+    List<Message> messages = [];
+    messages.add(Message(
         role: "user",
-        content: msg)
-    ).toJson())).then((http.Response response) {
+        content: msg));
+    http.post(url, headers: headers, body: jsonEncode(ChatCompletionsBody(
+      model: "gpt-3.5-turbo",
+      messages: messages
+    ).toJson())
+
+    ).then((http.Response response) {
         print(response.body);
     });
   }

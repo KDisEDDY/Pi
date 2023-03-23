@@ -1,13 +1,13 @@
-class Messages {
+class Message {
         final String role;
         final String content;
-        const Messages({
+        const Message({
             required this.role,
             required this.content
         });
 
-        factory Messages.fromJson(Map<String, dynamic> json) {
-            return Messages(
+        factory Message.fromJson(Map<String, dynamic> json) {
+            return Message(
                 role: json['role'] as String,
                 content: json['content'] as String
             );
